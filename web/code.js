@@ -89,19 +89,28 @@ function onMessageArrived(message) {
 
 
 function getRgb(val) {
+    val = parseFloat(val);
+    
+    /* Return gray color, if input is not a float. */
+    if(val == NaN) {
+        return 'gray';
+    }
+    
     if(val < 0.0) val = 0;
     if(val > 1.0) val = 1.0;
     
     var r = val * 255;
     var g = (1.0 - val) * 255;
-    
+
     return 'rgb(' + r + ',' + g + ',0)';
 }
 
 
 function handleLoadAvg(topic, payload) {
     $('#loadavg').html(payload);
-    $('#loadavg').css('background-color', getRgb(payload));
+
+    var color = getRgb(payload);
+    $('#loadavg').css('background-color', color);
 }
 
 $(document).ready(function() {
