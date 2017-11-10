@@ -107,9 +107,10 @@ function getRgb(val) {
 
 
 function handleLoadAvg(topic, payload) {
-    $('#loadavg').html(payload);
+    loadavg = eval(payload)
+    $('#loadavg').html(loadavg[0]);
 
-    var color = getRgb(payload);
+    var color = getRgb(payload[0]);
     $('#loadavg').css('background-color', color);
 }
 
